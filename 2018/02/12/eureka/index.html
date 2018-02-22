@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Eureka概述Spring Cloud Netflix技术栈中，Eureka作为服务注册中心对整个微服务架构起着最核心的整合作用，因此对Eureka还是有很大的必要进行深入研究（本篇不叙述如何搭建Eureka与Eureka集群实例，如有需求请自行谷歌）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eureka">
+<meta property="og:url" content="http://yoursite.com/2018/02/12/eureka/index.html">
+<meta property="og:site_name" content="笺默">
+<meta property="og:description" content="Eureka概述Spring Cloud Netflix技术栈中，Eureka作为服务注册中心对整个微服务架构起着最核心的整合作用，因此对Eureka还是有很大的必要进行深入研究（本篇不叙述如何搭建Eureka与Eureka集群实例，如有需求请自行谷歌）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/EurekaRole.png">
+<meta property="og:image" content="http://yoursite.com/images/eureka-code-1.png">
+<meta property="og:image" content="http://yoursite.com/images/eureka_server_1.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/eurekaregister.png">
+<meta property="og:image" content="http://yoursite.com/images/eurekarenew.png">
+<meta property="og:image" content="http://yoursite.com/images/cancel.png">
+<meta property="og:image" content="http://yoursite.com/images/fetch.png">
+<meta property="og:image" content="http://yoursite.com/images/evication.png">
+<meta property="og:image" content="http://yoursite.com/images/architecture-detail.png">
+<meta property="og:image" content="http://yoursite.com/images/syncUp.png">
+<meta property="og:image" content="http://yoursite.com/images/replicateToPeers.png">
+<meta property="og:image" content="http://yoursite.com/images/register.png">
+<meta property="og:updated_time" content="2018-02-22T10:47:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Eureka">
+<meta name="twitter:description" content="Eureka概述Spring Cloud Netflix技术栈中，Eureka作为服务注册中心对整个微服务架构起着最核心的整合作用，因此对Eureka还是有很大的必要进行深入研究（本篇不叙述如何搭建Eureka与Eureka集群实例，如有需求请自行谷歌）。">
+<meta name="twitter:image" content="http://yoursite.com/images/EurekaRole.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/12/eureka/"/>
+
+
+
+
+
+  <title>Eureka | 笺默</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">笺默</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/12/eureka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="笺默">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/005vAO6Qgy1focr2m4ownj30n60s80tw.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笺默">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Eureka</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T15:35:27+08:00">
+                2018-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Cloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/12/eureka/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/12/eureka/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Eureka概述"><a href="#Eureka概述" class="headerlink" title="Eureka概述"></a>Eureka概述</h1><p>Spring Cloud Netflix技术栈中，Eureka作为服务注册中心对整个微服务架构起着最核心的整合作用，因此对Eureka还是有很大的必要进行深入研究（本篇不叙述如何搭建Eureka与Eureka集群实例，如有需求请自行谷歌）。<br><a id="more"></a></p>
+<h2 id="Eureka分类"><a href="#Eureka分类" class="headerlink" title="Eureka分类"></a>Eureka分类</h2><p>Spring Cloud针对服务于发现，进行了一层抽象，并提供了三种实现方式</p>
+<ul>
+<li>Eureka</li>
+<li>Consul</li>
+<li>Zookeeper</li>
+</ul>
+<p>本文仅介绍Eureka<br>Eureka按照实例又可分为两类:</p>
+<ul>
+<li>Eureka Server:服务端，及服务的注册中心，负责维护所以实例的注册信息</li>
+<li>Eureka Client:客户端，根据功能又可分为两类：<ul>
+<li>Service Provider:服务的提供方</li>
+<li>Service Consumer:服务的注册方</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/EurekaRole.png" alt="图片"></p>
+<h2 id="Eureka核心功能组件"><a href="#Eureka核心功能组件" class="headerlink" title="Eureka核心功能组件"></a>Eureka核心功能组件</h2><p>  eureka的核心组件被包含在eureka-core模块下，其主要包括</p>
+<ul>
+<li><code>com.netflix.eureka.cluster</code>: 与peer节点复制相关的功能</li>
+<li><code>com.netflix.eureka.lease</code>: 即<code>续租</code>，用来控制注册信息的生命周期(添加、清楚、续约)</li>
+<li><code>com.netflix.eureka.registry</code>: 存储、查询注册服务信息</li>
+<li><code>com.netflix.eureka.resources</code>: RESUTful风格中的”R”,即资源。相当于Spring MVC中的Controller</li>
+<li><code>com.netflix.eureka.transport</code>: 发送HTTP请求的客户端，如发送心跳服务。</li>
+<li><code>com.netflix.eureka.aws</code>: 在amazon AWS服务相当的类</li>
+</ul>
+<p>eureka-client模块<br>Eureka客户端，微服务通过该客户端与eureka进行通信，屏蔽了通信细节</p>
+<p>eureka-server模块<br>包含了servlet应用的基本配置，如web.xml。构建成功后在该模块下生成一个可部署的war包</p>
+<p><a href="https://github.com/Netflix/eureka" target="_blank" rel="noopener">Eureka GitHub</a></p>
+<h1 id="Eureka-Server实现细节"><a href="#Eureka-Server实现细节" class="headerlink" title="Eureka Server实现细节"></a>Eureka Server实现细节</h1><h2 id="Client注册到注册中心"><a href="#Client注册到注册中心" class="headerlink" title="Client注册到注册中心"></a>Client注册到注册中心</h2><p> Eureka Client负责下面任务：</p>
+<ul>
+<li>向Eureka Server注册服务实例</li>
+<li>向Eureka Server租约续期</li>
+<li>当服务关闭期间，向Eureka Server取消续约</li>
+<li>查询Eureka Server中的服务实例列表</li>
+</ul>
+<p>将Client注册到注册中心，或是从Server获取服务列表时，大致就做了两件事情</p>
+<ul>
+<li>在应用主类中配置了<code>@EnableDiscoveryClient</code>注解</li>
+<li>在<code>application.properties</code>中用 <code>eureka.client.serviceUrl.defaultZone</code>参数指定了服务注册中心的位置</li>
+</ul>
+<p>通过搜索<code>@EnableDiscoveryClient</code>，我们可以发现有一个类和一个接口。通过梳理可以得到如下图的关系:<br><img src="/images/eureka-code-1.png" alt="图片"></p>
+<p>其中，左边的<code>DiscoveryClient</code>是Spring Cloud的接口，它定义了用来发现服务的常用抽象方法，而<code>EurekaDiscoveryClient</code>是对该接口的实现。<br>从命名来就可以，它实现了对Eureka发现服务的封装。所以<code>EurekaDiscoveryClient</code>依赖了Eureka的<code>com.netflix.discovery.EurekaClient</code>接口，它主要定义了针对Eureka的发现服务的抽象方法，真正实现发现服务则是netflix中的<code>com.netflix.discovery.DiscoveryClient</code>类</p>
+<h2 id="EnableEurekaServer"><a href="#EnableEurekaServer" class="headerlink" title="@EnableEurekaServer"></a>@EnableEurekaServer</h2><p>这个注解import了重要的<code>EurekaServerConfiguration</code>(1.40版本注意一下，import的有可能是<code>EurekaServerMarkerConfiguration</code>，但是上面注解@link了<code>EurekaServerConfiguration</code>)。<code>EurekaServerConfiguration</code>这个配置类中有两个方法，<code>jerseyFilterRegistration</code>方法是用来发现Jersey filter,<code>jerseyApplication</code>会加载一下的这些类<br><img src="/images/eureka_server_1.jpeg" alt="图片"></p>
+<h2 id="Register"><a href="#Register" class="headerlink" title="Register"></a>Register</h2><p>服务注册，这个接口会在Service Provider启动时被调用来实现服务注册。同时，当Service Provider的服务状态发生变化时，也会被调来更新服务状态<br>接口实现如下图：</p>
+<p>   1 <code>ApplicationResource</code>类接收Http服务请求，调用<code>PeerAwareInstanceRegistryImpl</code>(集群相关的重要类)中的<code>register</code>方法(代码在下图)<br>   2 <code>PeerAwareInstanceRegistryImpl</code>完成服务注册后，调用<code>replicateToPeers</code>方法(也是其类中的一个方法)向其他的Eureka Server节点做状态同步(异步操作)</p>
+<p> <img src="/images/eurekaregister.png" alt="图片"></p>
+<h2 id="Renew"><a href="#Renew" class="headerlink" title="Renew"></a>Renew</h2><p>服务续约操作是由Service Provider定期调用的，类似于heartbeat(心跳)。主要是用来告诉Eureka Server让它知道Service Provider还活着，避免服务被剔除掉。<br> <img src="/images/eurekarenew.png" alt="图片"></p>
+<h2 id="Cancal"><a href="#Cancal" class="headerlink" title="Cancal"></a>Cancal</h2><p>下线服务一般都在Service Provider shut down 的时候调用，用来把自身的服务从Eureka Server剔除出去，以防客户端调用不存在的服务<br> <img src="/images/cancel.png" alt="图片"></p>
+<h2 id="Fetch-Registries"><a href="#Fetch-Registries" class="headerlink" title="Fetch Registries"></a>Fetch Registries</h2><p>Fetch Registries由Service Consumer调用，用来获取Eureka Server上注册的服务。为了提供性能，服务列表在Eureka Server会缓存一份，同时会30秒更新一次。<br> <img src="/images/fetch.png" alt="图片"></p>
+<h2 id="Eviction"><a href="#Eviction" class="headerlink" title="Eviction"></a>Eviction</h2><p>Eviction(失效服务剔除)用来定期(默认为60秒)在Eureka Server检测失效的服务，检测标准就是超过一定时间内没有renew的服务。</p>
+<p>失效时间可以通过<code>eureka.instance.leaseExpirationDurationInSeconds</code>来设置，定期扫描时间可通过<code>eureka.server.evictionIntervalTimerInMs</code>进行配置<br><img src="/images/evication.png" alt="图片"></p>
+<h1 id="注册中心集群"><a href="#注册中心集群" class="headerlink" title="注册中心集群"></a>注册中心集群</h1><h2 id="官网架构图"><a href="#官网架构图" class="headerlink" title="官网架构图"></a>官网架构图</h2><p>  先来张Eureka官网的架构图<br>  <img src="/images/architecture-detail.png" alt="image"></p>
+<p>   1 Service Provider会向Eureka Server做register(服务注册)、renew(服务续约)、cancel(服务下线)<br>   2 Eureka Server之间会做服务注册的同步、从而保证服务状态一致<br>   3 Service Consumer会向Eureka Server注册并消费服务</p>
+<h2 id="PeerAwareInstanceRegistryImpl"><a href="#PeerAwareInstanceRegistryImpl" class="headerlink" title="PeerAwareInstanceRegistryImpl"></a>PeerAwareInstanceRegistryImpl</h2><p>  集群相关的重要类<code>com.netflix.eureka.registry.PeerAwareInstanceRegistryImpl</code>:为了保证集群里的所以Eureka Server节点的状态同步，所有以下的操作都会同步到集群的服务器上：服务注册(Register)、服务更新(Renew)、服务取消(Cancels),服务超时(Expirations),服务状态变更(Status Changes)。下面列举一下重要的方法</p>
+<ul>
+<li><code>syncUp</code>:在Eureka Server重启或更新节点时，会执行初始化。从集群其他节点中获取所以的实例注册信息，从而使服务能够提供正常的服务。当Eureka Server启动时，它会从其他节点上获取注册信息，如果同步失败，则在一定时间内拒绝服务。<br><img src="/images/syncUp.png" alt="图片"></li>
+<li><p><code>replicateToPeers</code>: 主要作用是同步所有的的集群节点:服务注册、服务更新、服务取消、服务超时和服务状态更新。但是需要注意以下几点</p>
+<ul>
+<li>如果集群中没有其他sever,显然不需要replicate</li>
+<li>如果轮循出的节点是自身，那么显然不需要通知自己</li>
+<li>isReplication为true，首先我们要清楚，实例发送rest只会发送到一台服务器上，实例发出的rest请求header里面isReplication为false，所以接受到示例的服务器会将实例同步到集群的其他的节点上，而如果将isReplication设为true，那么就可以避免通知已经注册过的节点上</li>
+</ul>
+<p><img src="/images/replicateToPeers.png" alt="图片"></p>
+</li>
+<li><code>register</code>: 注册实例，并且复印此实例的信息到所以的eureka server节点。如果其他的eureka server调用此节点、只在本节点更新信息，避免通知其他节点执行更新<br><img src="/images/register.png" alt="图片"></li>
+<li><code>renew</code>: 心跳，同步集群</li>
+<li><code>cancel</code>: 服务取消</li>
+<li><code>其他</code></li>
+</ul>
+<p>Eureka Server集群之间的状态是采取异步方式同步，这样的结果是保证不了节点之间的状态是不是一致的，但是可以保证最后的结果一定是一致的</p>
+<h2 id="新的节点加入集群后的影响"><a href="#新的节点加入集群后的影响" class="headerlink" title="新的节点加入集群后的影响"></a>新的节点加入集群后的影响</h2><p>当新的节点加入集群后，会对现有的Eureka Client和Eureka Server产生哪些影响以及如何发现这些新的节点呢:</p>
+<ul>
+<li><strong>新增的Eureka Server</strong>: 在Eureka Server重启或是新的server加入后，它会从集群的其他节点中获取实例注册信息。如果同步失败，它会在一定时间内(此时间可通过eureka.server.peer-eureka-nodes-update-interval-ms决定)拒绝服务</li>
+<li>已有<strong>Eureka Server</strong>和<strong>Service Consumer</strong>是如何发现新的Eureka Server<ul>
+<li><strong>已有的Eureka Server</strong>: 在运行的过程中，Eureka Server之间会定时同步注册的信息。这样即使新的Application Service只向集群中一台注册服务，则经过一段时间后这个集群的所以Eureka Server都会显示这个地址信息。各节点之间定时通过(eureka.server.peer-eureka-nodes-update-interval-ms决定)</li>
+<li><strong>Service Consumer</strong>: Service Consumer刚启动的时候，它会从配置文件中读取Eureka Server的地址信息。当集群新增一个Eureka Server时，Service Consumer会定时调用Eureka Server集群，获取所以的节点并更新本地配置。</li>
+</ul>
+</li>
+</ul>
+<h2 id="新服务注册时的影响"><a href="#新服务注册时的影响" class="headerlink" title="新服务注册时的影响"></a>新服务注册时的影响</h2><p>Service Provider要对外提供服务，把自己注册到Eureka Server上。如何配置参数eureka.client.registryWithEureka=true时，，会向Eureka Server进行注册，Server会保存注册信息到内存中</p>
+<p>Service Consumer为了避免每次调用服务请求都需要向Eureka Server获取注册信息，此时需要设置eureka.client.fetchRegistry=true,它会在本地缓存所以的注册信息。为了保持数据的有效性，它会定时向注册信息发送心跳更新实例</p>
+<h2 id="心跳服务-renew"><a href="#心跳服务-renew" class="headerlink" title="心跳服务(renew)"></a>心跳服务(renew)</h2><p>服务实例会通过心跳(eureka.instance.less-renewal-interval-in-seconds定义心跳的频率，默认是30s)续约的方式向Eureka Server定时跟新自己的状态。Server收到心跳后，会通知集群中的其他节点更新此实例的装态。Service Consumer/Service Provider也会定时更新缓存的实例信息。</p>
+<h2 id="线下服务和剔除"><a href="#线下服务和剔除" class="headerlink" title="线下服务和剔除"></a>线下服务和剔除</h2><p>服务的线下有两种</p>
+<ul>
+<li>在Service Provider服务shutdown时，主动通知Eureka Server剔除服务，从而避免客户端调用已经下线的服务</li>
+<li>Eureka Server会定时进行检测，如果发现实例在一定的时间内没有收到心跳，则会注销此实例</li>
+</ul>
+<h2 id="自我保护模式"><a href="#自我保护模式" class="headerlink" title="自我保护模式"></a>自我保护模式</h2><p> 如果Eureka Server在15分钟内没有接受到某个微服务的心跳，则会将该实例注销(90秒)。但是当网络分区出现故障后，微服务和Eureka Server之间无法正常通信，这就非常危险了。因为微服务本身是健康的，但是却不改注销此服务。</p>
+<p> Eureka Server通过自我保护模式来解决这个问题 – 当Server节点在短时时内丢失大量的服务时，那么这个节点就会自动进入保护模式。一旦进入这个模式，Eureka Server就会保护注册表中的信息，不在删除服务注册表中的数据。当网络故障恢复时，Server也就自动退出此模式</p>
+<h1 id="Eureka与Zookeeper"><a href="#Eureka与Zookeeper" class="headerlink" title="Eureka与Zookeeper"></a>Eureka与Zookeeper</h1><p> 作为一个分布式协同服务，zk非常好，但是对于Service发现服务就不适合了。因为对于Service发现服务来说就算是返回了包含了不实的信息也比没有返回信息要好，再者对于Service来说，能可返回某服务5分钟之前在哪几个服务器上也总比不能因为暂时的网络故障导致找不到服务器从而找不到服务信息要来的好。所以说，用zk来做Service肯定是错误的</p>
+<p> Eureka的架构保证了它能够成为Service发现服务。在Eureka中，如果某一台服务器宕机了，Eureka不会有像zk一样采用leader选取过程；Eureka采用peer to peer的方式来进行相互信息间的传输。客户端请求会自动切换到新的Eureka中，当宕机的服务器恢复时，eureka会再次将其纳入集群中并同步宕机时注册的一些的新的服务信息。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p> <a href="http://nobodyiam.com/2016/06/25/dive-into-eureka/" target="_blank" rel="noopener">Dive into Eureka</a><br> <a href="http://dockone.io/article/78" target="_blank" rel="noopener">为什么不应该使用ZooKeeper做服务发现</a><br> <a href="https://springcloud.cc/spring-cloud-dalston.html#_why_is_it_so_slow_to_register_a_service" target="_blank" rel="noopener">spring cloud中文官方文档</a><br> <a href="http://yeming.me/2016/12/02/eureka2/" target="_blank" rel="noopener">spring-cloud-eureka源码分析二(server端)</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/11/初识Spring-Cloud-0/" rel="next" title="初识Spring Cloud">
+                <i class="fa fa-chevron-left"></i> 初识Spring Cloud
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ww1.sinaimg.cn/large/005vAO6Qgy1focr2m4ownj30n60s80tw.jpg"
+                alt="笺默" />
+            
+              <p class="site-author-name" itemprop="name">笺默</p>
+              <p class="site-description motion-element" itemprop="description">May the force be with me</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jianmo1997" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/sao-nian-wu-zhi/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-zhihu"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka概述"><span class="nav-number">1.</span> <span class="nav-text">Eureka概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka分类"><span class="nav-number">1.1.</span> <span class="nav-text">Eureka分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka核心功能组件"><span class="nav-number">1.2.</span> <span class="nav-text">Eureka核心功能组件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka-Server实现细节"><span class="nav-number">2.</span> <span class="nav-text">Eureka Server实现细节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Client注册到注册中心"><span class="nav-number">2.1.</span> <span class="nav-text">Client注册到注册中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EnableEurekaServer"><span class="nav-number">2.2.</span> <span class="nav-text">@EnableEurekaServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Register"><span class="nav-number">2.3.</span> <span class="nav-text">Register</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Renew"><span class="nav-number">2.4.</span> <span class="nav-text">Renew</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cancal"><span class="nav-number">2.5.</span> <span class="nav-text">Cancal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fetch-Registries"><span class="nav-number">2.6.</span> <span class="nav-text">Fetch Registries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eviction"><span class="nav-number">2.7.</span> <span class="nav-text">Eviction</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册中心集群"><span class="nav-number">3.</span> <span class="nav-text">注册中心集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#官网架构图"><span class="nav-number">3.1.</span> <span class="nav-text">官网架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PeerAwareInstanceRegistryImpl"><span class="nav-number">3.2.</span> <span class="nav-text">PeerAwareInstanceRegistryImpl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新的节点加入集群后的影响"><span class="nav-number">3.3.</span> <span class="nav-text">新的节点加入集群后的影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新服务注册时的影响"><span class="nav-number">3.4.</span> <span class="nav-text">新服务注册时的影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#心跳服务-renew"><span class="nav-number">3.5.</span> <span class="nav-text">心跳服务(renew)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线下服务和剔除"><span class="nav-number">3.6.</span> <span class="nav-text">线下服务和剔除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自我保护模式"><span class="nav-number">3.7.</span> <span class="nav-text">自我保护模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka与Zookeeper"><span class="nav-number">4.</span> <span class="nav-text">Eureka与Zookeeper</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">5.1.</span> <span class="nav-text">参考文章</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">笺默</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/02/12/eureka/';
+          this.page.identifier = '2018/02/12/eureka/';
+          this.page.title = 'Eureka';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
