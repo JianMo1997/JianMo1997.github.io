@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是FeignFeign是一个声明式Web Service客户端。使用Feign能让编写Web Service更加的简单，它的使用方式定义一个接口，然后在上面添加注解，同时也自带了JAX-RS注解等。Spring Cloud对Feign进行了增强，使得Feign支持Spring MVC的注解，并整合了Ribbon以及Eureka,从而使得Feign使用更加的方便其源码实现的过程如下(有兴趣自行去">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Feign">
+<meta property="og:url" content="http://yoursite.com/2018/02/23/Feign/index.html">
+<meta property="og:site_name" content="笺默">
+<meta property="og:description" content="什么是FeignFeign是一个声明式Web Service客户端。使用Feign能让编写Web Service更加的简单，它的使用方式定义一个接口，然后在上面添加注解，同时也自带了JAX-RS注解等。Spring Cloud对Feign进行了增强，使得Feign支持Spring MVC的注解，并整合了Ribbon以及Eureka,从而使得Feign使用更加的方便其源码实现的过程如下(有兴趣自行去">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/feign1.png">
+<meta property="og:image" content="http://yoursite.com/images/feign2.png">
+<meta property="og:updated_time" content="2018-02-24T03:02:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Feign">
+<meta name="twitter:description" content="什么是FeignFeign是一个声明式Web Service客户端。使用Feign能让编写Web Service更加的简单，它的使用方式定义一个接口，然后在上面添加注解，同时也自带了JAX-RS注解等。Spring Cloud对Feign进行了增强，使得Feign支持Spring MVC的注解，并整合了Ribbon以及Eureka,从而使得Feign使用更加的方便其源码实现的过程如下(有兴趣自行去">
+<meta name="twitter:image" content="http://yoursite.com/images/feign1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/23/Feign/"/>
+
+
+
+
+
+  <title>Feign | 笺默</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">笺默</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/23/Feign/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="笺默">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/005vAO6Qgy1focr2m4ownj30n60s80tw.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="笺默">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Feign</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T09:59:10+08:00">
+                2018-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Cloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/23/Feign/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/23/Feign/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是Feign"><a href="#什么是Feign" class="headerlink" title="什么是Feign"></a>什么是Feign</h1><p>Feign是一个声明式Web Service客户端。使用Feign能让编写Web Service更加的简单，它的使用方式定义一个接口，然后在上面添加注解，同时也自带了JAX-RS注解等。Spring Cloud对Feign进行了增强，使得Feign支持Spring MVC的注解，并整合了Ribbon以及Eureka,从而使得Feign使用更加的方便<br>其源码实现的过程如下(有兴趣自行去GitHub上膜拜).</p>
+<a id="more"></a>
+<h1 id="FeignClient"><a href="#FeignClient" class="headerlink" title="FeignClient"></a>FeignClient</h1><p>在Spring Cloud中使用Feign非常简单，我们仅需要申明一个接口，并在此接口上申明@FeginClient即可</p>
+<h2 id="FeignClient源码分析"><a href="#FeignClient源码分析" class="headerlink" title="FeignClient源码分析"></a>FeignClient源码分析</h2><p>FeignClient注解被@Target(ElementType.TYPE)修饰，表示FeignClient注解作用目标在接口上;<br>@Retention(RetentionPolicy.RUNTIME),注解会在class字节码文件中存在，在运行时可以通过反射获取;<br>@Documented表示该注解会被包含在javadoc中<br>@FeignClient标签的常用属性</p>
+<ul>
+<li><code>name()</code>:指定FeignClient的名称，如果项目使用了Ribbon,name属性会作为微服务的名称，用于服务发现。value()方法的类似于name()</li>
+<li><code>url()</code>:直接编写被调用的微服务的url地址</li>
+<li><code>decode404()</code>:当发生404错误时，如果该方法为true,会调用decoder进行解码，否则抛出FeignException</li>
+<li><code>configuration()</code>:标明FeignClient配置类，默认的配置类为FeignClientsConfiguration类，可覆盖Decoder、Encoder和Contract等信息，进行自定义配置</li>
+<li><code>fallback()</code>:填写熔断器的信息类</li>
+<li><code>fallbackFactory()</code>: 工厂类，用于生成fallback类实例，通过这个属性我们可以实现每个接口通过的容错逻辑，减少重复的代码</li>
+<li><code>path()</code>:定义当前FeignClient的统一前缀</li>
+</ul>
+<h2 id="FeignClient的配置"><a href="#FeignClient的配置" class="headerlink" title="FeignClient的配置"></a>FeignClient的配置</h2><p>默认的配置是FeignClientsConfiguration，打开这个类，可以发现这个类配置很多bean，包括FeignLoggerFactory、Retryer、Feign.Builder、FormattingConversionService。其中还包括Decoder、Encoder、Contract，如果这个3个bean没有注入的情况下，会进行自动注入。</p>
+<h3 id="重写配置"><a href="#重写配置" class="headerlink" title="重写配置"></a>重写配置</h3><p>你可以重写FeignClientsConfiguration，从而达到自定义配置的目的，比如FeignClientsConfiguration默认重试次数为<code>Retryer.NEVER_RETRY</code>,即不重试。我们可以重新写一个配置文件从而覆盖原先的方法,比如:<br><img src="/images/feign1.png" alt="图片"><br>在上述代码更改了该FeginClient的重试次数，重试间隔为100ms，最大重试时间为1s，重试次数为5次</p>
+<h1 id="Feign工作原理"><a href="#Feign工作原理" class="headerlink" title="Feign工作原理"></a>Feign工作原理</h1><p>feign 是一个伪客户端，即它不做任何的处理请求。Feign通过处理注解生成request,从而简化HTTP API开发的目的，即开发人员可以使用注解的方式来定request api模板,在发送http request请求之前，feign通过注解的方式替换掉request模板中的参数，这种实现方式显得更为直接、可理解。</p>
+<p>通过包扫描注入FeignClient的bean，该源码在<strong>FeignClientsRegistrar</strong>类：<br>首先在启动配置上检查是否有@EnableFeignClients注解，如果有该注解，开启包扫描，扫描被@FeignClient注解接口。</p>
+<pre><code>private void registerDefaultConfiguration(AnnotationMetadata metadata,
+        BeanDefinitionRegistry registry) {
+    Map&lt;String, Object&gt; defaultAttrs = metadata
+            .getAnnotationAttributes(EnableFeignClients.class.getName(), true);
+
+    if (defaultAttrs != null &amp;&amp; defaultAttrs.containsKey(&quot;defaultConfiguration&quot;)) {
+        String name;
+        if (metadata.hasEnclosingClass()) {
+            name = &quot;default.&quot; + metadata.getEnclosingClassName();
+        }
+        else {
+            name = &quot;default.&quot; + metadata.getClassName();
+        }
+        registerClientConfiguration(registry, name,
+                defaultAttrs.get(&quot;defaultConfiguration&quot;));
+    }
+}
+</code></pre><p>程序通过包扫描，当类有@FeignClient注解，将注解的信息一并取出，连同类名一起，赋给<code>BeanDefinitionBuilder</code>,然后根据<code>BeanDefinitionBuilder</code>得到<code>beanDefinition</code>,最后<code>beanDefinition</code>注入到IOC容器中</p>
+<pre><code>public void registerFeignClients(AnnotationMetadata metadata,
+          BeanDefinitionRegistry registry) {
+      ClassPathScanningCandidateComponentProvider scanner = getScanner();
+      scanner.setResourceLoader(this.resourceLoader);
+
+      Set&lt;String&gt; basePackages;
+
+      Map&lt;String, Object&gt; attrs = metadata
+              .getAnnotationAttributes(EnableFeignClients.class.getName());
+      AnnotationTypeFilter annotationTypeFilter = new AnnotationTypeFilter(
+              FeignClient.class);
+      final Class&lt;?&gt;[] clients = attrs == null ? null
+              : (Class&lt;?&gt;[]) attrs.get(&quot;clients&quot;);
+      if (clients == null || clients.length == 0) {
+          scanner.addIncludeFilter(annotationTypeFilter);
+          basePackages = getBasePackages(metadata);
+      }
+      else {
+          final Set&lt;String&gt; clientClasses = new HashSet&lt;&gt;();
+          basePackages = new HashSet&lt;&gt;();
+          for (Class&lt;?&gt; clazz : clients) {
+              basePackages.add(ClassUtils.getPackageName(clazz));
+              clientClasses.add(clazz.getCanonicalName());
+          }
+          AbstractClassTestingTypeFilter filter = new AbstractClassTestingTypeFilter() {
+              @Override
+              protected boolean match(ClassMetadata metadata) {
+                  String cleaned = metadata.getClassName().replaceAll(&quot;\\$&quot;, &quot;.&quot;);
+                  return clientClasses.contains(cleaned);
+              }
+          };
+          scanner.addIncludeFilter(
+                  new AllTypeFilter(Arrays.asList(filter, annotationTypeFilter)));
+      }
+
+      for (String basePackage : basePackages) {
+          Set&lt;BeanDefinition&gt; candidateComponents = scanner
+                  .findCandidateComponents(basePackage);
+          for (BeanDefinition candidateComponent : candidateComponents) {
+              if (candidateComponent instanceof AnnotatedBeanDefinition) {
+                  // verify annotated class is an interface
+                  AnnotatedBeanDefinition beanDefinition = (AnnotatedBeanDefinition) candidateComponent;
+                  AnnotationMetadata annotationMetadata = beanDefinition.getMetadata();
+                  Assert.isTrue(annotationMetadata.isInterface(),
+                          &quot;@FeignClient can only be specified on an interface&quot;);
+
+                  Map&lt;String, Object&gt; attributes = annotationMetadata
+                          .getAnnotationAttributes(
+                                  FeignClient.class.getCanonicalName());
+
+                  String name = getClientName(attributes);
+                  registerClientConfiguration(registry, name,
+                          attributes.get(&quot;configuration&quot;));
+
+                  registerFeignClient(registry, annotationMetadata, attributes);
+              }
+          }
+      }
+  }
+
+private void registerFeignClient(BeanDefinitionRegistry registry,
+      AnnotationMetadata annotationMetadata, Map&lt;String, Object&gt; attributes) {
+      String className = annotationMetadata.getClassName();
+      BeanDefinitionBuilder definition = BeanDefinitionBuilder
+              .genericBeanDefinition(FeignClientFactoryBean.class);
+      validate(attributes);
+      definition.addPropertyValue(&quot;url&quot;, getUrl(attributes));
+      definition.addPropertyValue(&quot;path&quot;, getPath(attributes));
+      String name = getName(attributes);
+      definition.addPropertyValue(&quot;name&quot;, name);
+      definition.addPropertyValue(&quot;type&quot;, className);
+      definition.addPropertyValue(&quot;decode404&quot;, attributes.get(&quot;decode404&quot;));
+      definition.addPropertyValue(&quot;fallback&quot;, attributes.get(&quot;fallback&quot;));
+      definition.addPropertyValue(&quot;fallbackFactory&quot;, attributes.get(&quot;fallbackFactory&quot;));
+      definition.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
+
+      String alias = name + &quot;FeignClient&quot;;
+      AbstractBeanDefinition beanDefinition = definition.getBeanDefinition();
+
+      boolean primary = (Boolean)attributes.get(&quot;primary&quot;); // has a default, won&apos;t be null
+
+      beanDefinition.setPrimary(primary);
+
+      String qualifier = getQualifier(attributes);
+      if (StringUtils.hasText(qualifier)) {
+          alias = qualifier;
+      }
+
+      BeanDefinitionHolder holder = new BeanDefinitionHolder(beanDefinition, className,
+              new String[] { alias });
+      BeanDefinitionReaderUtils.registerBeanDefinition(holder, registry);
+}
+</code></pre><p>注入bean后，通过jdk代理，当请求Feign Client的方法会被拦截，代码在<code>ReflectiveFeign</code>类：</p>
+<pre><code>public &lt;T&gt; T newInstance(Target&lt;T&gt; target) {
+    Map&lt;String, MethodHandler&gt; nameToHandler = targetToHandlersByName.apply(target);
+    Map&lt;Method, MethodHandler&gt; methodToHandler = new LinkedHashMap&lt;Method, MethodHandler&gt;();
+    List&lt;DefaultMethodHandler&gt; defaultMethodHandlers = new LinkedList&lt;DefaultMethodHandler&gt;();
+
+    for (Method method : target.type().getMethods()) {
+      if (method.getDeclaringClass() == Object.class) {
+        continue;
+      } else if(Util.isDefault(method)) {
+        DefaultMethodHandler handler = new DefaultMethodHandler(method);
+        defaultMethodHandlers.add(handler);
+        methodToHandler.put(method, handler);
+      } else {
+        methodToHandler.put(method, nameToHandler.get(Feign.configKey(target.type(), method)));
+      }
+    }
+    InvocationHandler handler = factory.create(target, methodToHandler);
+    T proxy = (T) Proxy.newProxyInstance(target.type().getClassLoader(), new Class&lt;?&gt;[]{target.type()}, handler);
+
+    for(DefaultMethodHandler defaultMethodHandler : defaultMethodHandlers) {
+      defaultMethodHandler.bindTo(proxy);
+    }
+    return proxy;
+}
+</code></pre><p>在<code>SynchronousMethodHandler</code>类下进行拦截处理，当被FeignClient的方法拦截会根据参数生成RequestTemplate对象，该对象就是http请求模板</p>
+<pre><code>@Override
+  public Object invoke(Object[] argv) throws Throwable {
+    RequestTemplate template = buildTemplateFromArgs.create(argv);
+    Retryer retryer = this.retryer.clone();
+    while (true) {
+      try {
+        return executeAndDecode(template);
+      } catch (RetryableException e) {
+        retryer.continueOrPropagate(e);
+        if (logLevel != Logger.Level.NONE) {
+          logger.logRetry(metadata.configKey(), logLevel);
+        }
+        continue;
+      }
+    }
+  }
+</code></pre><p>这个类中有一个<code>executeAndDecode(RequestTemplate template)</code>方法，此方法的作用是通过RequestTemplate生成request请求对象，然后根据用client获取response.</p>
+<h1 id="Client组件"><a href="#Client组件" class="headerlink" title="Client组件"></a>Client组件</h1><p>Feign最终发送request请求以及接收response响应，都是由Client组件完成的。其中Client的实现类，只要有Client.Default,该类由HttpURLConnnection实现网络请求，另外还支持Okhttp、HttpClient</p>
+<p>首先我们先看一下<code>FeignRibbonClientAutoConfiguration</code><br><img src="/images/feign2.png" alt="图片"></p>
+<h2 id="如何在Feign中使用HttpClient"><a href="#如何在Feign中使用HttpClient" class="headerlink" title="如何在Feign中使用HttpClient"></a>如何在Feign中使用HttpClient</h2><p>从上图可知，<code>FeignRibbonClientAutoConfiguration</code>分别@import了三个类，当启动时会自动扫描这些配置文件，HttpClient对应的配置类为<code>HttpClientFeignLoadBalancedConfiguration</code>.</p>
+<p>从代码<code>@ConditionalOnClass({ ILoadBalancer.class, Feign.class })</code>注解可知，只需要在pom文件上HttpClient的classpath就行了，另外需要在配置文件上加上<code>feign.httpclient.enabled=true</code>,但是从<code>@ConditionalOnProperty</code>注解可知，默认情况下就是为true。</p>
+<p>然后我们只需要在pom上添加</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.netflix.feign&lt;/groupId&gt;
+    &lt;artifactId&gt;feign-httpclient&lt;/artifactId&gt;
+    &lt;version&gt;RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>同理Okhttp也只需要在pom配置一下就可以了</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.netflix.feign&lt;/groupId&gt;
+    &lt;artifactId&gt;feign-okhttp&lt;/artifactId&gt;
+    &lt;version&gt;RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h1 id="Feign负载均衡实现"><a href="#Feign负载均衡实现" class="headerlink" title="Feign负载均衡实现"></a>Feign负载均衡实现</h1><p>通过上述的类配置配置Client的类型(httpurlconnection,okhttp以及httpclient)时候，可知最终向容器注入的是LoadBalancerFeignClient,即负载均衡客户端</p>
+<pre><code>@Override
+public Response execute(Request request, Request.Options options) throws IOException {
+    try {
+        URI asUri = URI.create(request.url());
+        String clientName = asUri.getHost();
+        URI uriWithoutHost = cleanUrl(request.url(), clientName);
+        FeignLoadBalancer.RibbonRequest ribbonRequest = new FeignLoadBalancer.RibbonRequest(
+                this.delegate, request, uriWithoutHost);
+
+        IClientConfig requestConfig = getClientConfig(options, clientName);
+        return lbClient(clientName).executeWithLoadBalancer(ribbonRequest,
+                requestConfig).toResponse();
+    }
+    catch (ClientException e) {
+        IOException io = findIOException(e);
+        if (io != null) {
+            throw io;
+        }
+        throw new RuntimeException(e);
+    }
+}
+</code></pre><p>其中有个<code>executeWithLoadBalancer()</code>方法，即通过负载均衡的方式请求</p>
+<pre><code>public T executeWithLoadBalancer(final S request, final IClientConfig requestConfig) throws ClientException {
+    RequestSpecificRetryHandler handler = getRequestSpecificRetryHandler(request, requestConfig);
+    LoadBalancerCommand&lt;T&gt; command = LoadBalancerCommand.&lt;T&gt;builder()
+            .withLoadBalancerContext(this)
+            .withRetryHandler(handler)
+            .withLoadBalancerURI(request.getUri())
+            .build();
+
+    try {
+        return command.submit(
+            new ServerOperation&lt;T&gt;() {
+                @Override
+                public Observable&lt;T&gt; call(Server server) {
+                    URI finalUri = reconstructURIWithServer(server, request.getUri());
+                    S requestForServer = (S) request.replaceUri(finalUri);
+                    try {
+                        return Observable.just(AbstractLoadBalancerAwareClient.this.execute(requestForServer, requestConfig));
+                    } 
+                    catch (Exception e) {
+                        return Observable.error(e);
+                    }
+                }
+            })
+            .toBlocking()
+            .single();
+    } catch (Exception e) {
+        Throwable t = e.getCause();
+        if (t instanceof ClientException) {
+            throw (ClientException) t;
+        } else {
+            throw new ClientException(e);
+        }
+    }
+
+}
+</code></pre><p>其中服务在submit()方法上，点击submit进入具体的方法，这个方法就是<code>LoadBalancerCommand</code>的方法,</p>
+<p>其中还有一个selectServer()方法，该方法的作用是选择服务进行负载均衡</p>
+<pre><code>private Observable&lt;Server&gt; selectServer() {
+    return Observable.create(new OnSubscribe&lt;Server&gt;() {
+        @Override
+        public void call(Subscriber&lt;? super Server&gt; next) {
+            try {
+                Server server = loadBalancerContext.getServerFromLoadBalancer(loadBalancerURI, loadBalancerKey);   
+                next.onNext(server);
+                next.onCompleted();
+            } catch (Exception e) {
+                next.onError(e);
+            }
+        }
+    });
+}
+</code></pre><p>然后将负载均衡交由LoadBalancerContext即Ribbon处理</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Feign实现过程</p>
+<ul>
+<li>首先通过启动类上的<code>@EnableFeignClients</code>开启FeignClient</li>
+<li>根据Feign规则实现接口，并加<code>@FeignClient</code></li>
+<li>程序启动后会扫描所以的<code>@FeignClient</code>注解类，将其添加到IOC容器中</li>
+<li>当接口被调用后，通过jdk的代理，生成具体的RequestTemplate</li>
+<li>RequestTemplate生成request</li>
+<li>Request交由Client处理,Client可以是HttpConnection、Okhttp、HttpClient。默认为HttpConnection</li>
+<li>最后Client被封装到LoadBalanceClient类，这个类结合Ribbon实现负载均衡</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/12/eureka/" rel="next" title="Eureka">
+                <i class="fa fa-chevron-left"></i> Eureka
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://ww1.sinaimg.cn/large/005vAO6Qgy1focr2m4ownj30n60s80tw.jpg"
+                alt="笺默" />
+            
+              <p class="site-author-name" itemprop="name">笺默</p>
+              <p class="site-description motion-element" itemprop="description">May the force be with me</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jianmo1997" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/sao-nian-wu-zhi/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-zhihu"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Feign"><span class="nav-number">1.</span> <span class="nav-text">什么是Feign</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FeignClient"><span class="nav-number">2.</span> <span class="nav-text">FeignClient</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FeignClient源码分析"><span class="nav-number">2.1.</span> <span class="nav-text">FeignClient源码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FeignClient的配置"><span class="nav-number">2.2.</span> <span class="nav-text">FeignClient的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重写配置"><span class="nav-number">2.2.1.</span> <span class="nav-text">重写配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feign工作原理"><span class="nav-number">3.</span> <span class="nav-text">Feign工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Client组件"><span class="nav-number">4.</span> <span class="nav-text">Client组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在Feign中使用HttpClient"><span class="nav-number">4.1.</span> <span class="nav-text">如何在Feign中使用HttpClient</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feign负载均衡实现"><span class="nav-number">5.</span> <span class="nav-text">Feign负载均衡实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">笺默</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/02/23/Feign/';
+          this.page.identifier = '2018/02/23/Feign/';
+          this.page.title = 'Feign';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
