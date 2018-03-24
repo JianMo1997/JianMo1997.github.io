@@ -79,17 +79,23 @@
 
 
 
-<meta name="description" content="以前时长会用到一些命令，但是时间一长不用就忘了，今天将这些命令整理一下，用作参考">
+<meta name="description" content="什么是RibbonRibbon是一个开源的负载均衡项目，可以简单的理解成类似于Nginx的负载均衡模块的功能，其官方的解释是 Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients.  Feign already uses Ri">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用命令">
-<meta property="og:url" content="http://yoursite.com/2018/02/11/hexo常用命令/index.html">
+<meta property="og:title" content="Ribbon">
+<meta property="og:url" content="http://yoursite.com/2018/02/26/Ribbon/index.html">
 <meta property="og:site_name" content="笺默">
-<meta property="og:description" content="以前时长会用到一些命令，但是时间一长不用就忘了，今天将这些命令整理一下，用作参考">
+<meta property="og:description" content="什么是RibbonRibbon是一个开源的负载均衡项目，可以简单的理解成类似于Nginx的负载均衡模块的功能，其官方的解释是 Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients.  Feign already uses Ri">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-24T08:07:30.000Z">
+<meta property="og:image" content="http://yoursite.com/images/ribbon1.png">
+<meta property="og:image" content="http://yoursite.com/images/ribbon2.png">
+<meta property="og:image" content="http://yoursite.com/images/ribbon3.png">
+<meta property="og:image" content="http://yoursite.com/images/ribbon5.png">
+<meta property="og:image" content="http://yoursite.com/images/ribbon6.png">
+<meta property="og:updated_time" content="2018-03-24T08:02:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="常用命令">
-<meta name="twitter:description" content="以前时长会用到一些命令，但是时间一长不用就忘了，今天将这些命令整理一下，用作参考">
+<meta name="twitter:title" content="Ribbon">
+<meta name="twitter:description" content="什么是RibbonRibbon是一个开源的负载均衡项目，可以简单的理解成类似于Nginx的负载均衡模块的功能，其官方的解释是 Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients.  Feign already uses Ri">
+<meta name="twitter:image" content="http://yoursite.com/images/ribbon1.png">
 
 
 
@@ -119,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/11/hexo常用命令/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/26/Ribbon/"/>
 
 
 
 
 
-  <title>常用命令 | 笺默</title>
+  <title>Ribbon | 笺默</title>
   
 
 
@@ -232,7 +238,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/11/hexo常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/Ribbon/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="笺默">
@@ -249,7 +255,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">常用命令</h1>
+          <h1 class="post-title" itemprop="name headline">Ribbon</h1>
         
 
         <div class="post-meta">
@@ -261,8 +267,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-11T17:17:02+08:00">
-                2018-02-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T11:21:45+08:00">
+                2018-02-26
               </time>
             
 
@@ -284,8 +290,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂记/" itemprop="url" rel="index">
-                    <span itemprop="name">杂记</span>
+                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring Cloud</span>
                   </a>
                 </span>
 
@@ -302,9 +308,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/11/hexo常用命令/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/26/Ribbon/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/11/hexo常用命令/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/26/Ribbon/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -332,117 +338,110 @@
       
 
       
-        <p>以前时长会用到一些命令，但是时间一长不用就忘了，今天将这些命令整理一下，用作参考<br><a id="more"></a></p>
-<h1 id="Mac-Linux"><a href="#Mac-Linux" class="headerlink" title="Mac(Linux)"></a>Mac(Linux)</h1><ul>
-<li><strong>shift+command+.</strong> :显示隐藏文件命令</li>
-<li><strong>alt+command+c</strong> :复制当前的文件路径</li>
-<li>ping www.baidu.com :获取当前网站的ip地址</li>
-<li>hostname :显示主机名称</li>
-<li>ifconfig :显示主机IP地址</li>
-<li>top :显示进程、load、cpu、内存等；Ctrl+ C 退出(control+c)Mac</li>
-<li>vi :编辑一个文件</li>
-<li><p>control+c :结束当前开启的进程</p>
-</li>
-<li><p>ps aux :查看所有进程</p>
-</li>
-<li>ps aux | grep java :查看所有Java进程</li>
-<li>grep NullPoiterException xxx.log | wc -l :日志文件中搜索NPE异常有多少个</li>
-<li>grep NullPoiterException topservice.log &gt; npe.log :日志文件中搜索NPE异常到npe.log</li>
-<li>cat pom.xml :查看文件内容（全部）</li>
-<li>more pom.xml :查看文件内容（分屏）</li>
-<li>cat pom.xml | grep upp :查看包含spring的依赖</li>
-<li>file /bin/ls :查看机器是否为64位机器</li>
-<li><p>objdump -a xxx.so :查看so是否为64位</p>
-</li>
-<li><p>ls :显示当前目录下的所以文件</p>
-</li>
-<li>ls :-l 等同于ll</li>
-<li><p>ll</p>
-</li>
-<li><p>env :查看环境变量</p>
-</li>
-<li>env | grep LANG : 查看特定环境变量</li>
-<li>cd :返回用户根目录</li>
-<li>cd – :返回上一次进入的目录</li>
-<li>向上箭头，运行上一个命令</li>
-<li><p>向下箭头，运行下一个命令</p>
-</li>
-<li><p>mv x.so y.so :重命名</p>
-</li>
-<li>wget url :下载或者访问url</li>
-<li>curl url :访问url</li>
-<li>pwd :查看当前所在目录</li>
-<li>scp -r .bash_profile admin@10.232.13.132:~ :远程拷贝</li>
-<li>ssh username@hostname :SSH登录到另一台服务器</li>
-</ul>
-<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><ul>
-<li>git branch dev :创建分支</li>
-<li>git checkout :切换分支</li>
-<li><p>git push  –set-upstream :上传代码</p>
-</li>
-<li><p>git status :查看常用命令</p>
-</li>
-<li>git diff   :查看变更内容</li>
-<li>git log    :查看提交历史</li>
-</ul>
-<h3 id="git更改用户和邮箱命令"><a href="#git更改用户和邮箱命令" class="headerlink" title="git更改用户和邮箱命令"></a>git更改用户和邮箱命令</h3><p>查看git用户和邮箱</p>
+        <h1 id="什么是Ribbon"><a href="#什么是Ribbon" class="headerlink" title="什么是Ribbon"></a>什么是Ribbon</h1><p>Ribbon是一个开源的负载均衡项目，可以简单的理解成类似于Nginx的负载均衡模块的功能，其官方的解释是</p>
+<pre><code>Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients. 
+Feign already uses Ribbon, so if you are using @FeignClient then this section also applies.
+</code></pre><a id="more"></a>
+<p>其主要作用有</p>
 <ul>
-<li>git config  user.name</li>
-<li>git config  user.email</li>
+<li>负载均衡</li>
+<li>容错</li>
+<li>多协议(HTTP,TCP,UDP)支持异步和反应模式</li>
+<li>缓存和批处理</li>
 </ul>
-<p>修改git用户和邮箱</p>
-<ul>
-<li>git config  - -global user.name</li>
-<li>git config  - -global user.email</li>
-</ul>
-<h3 id="GitBook"><a href="#GitBook" class="headerlink" title="GitBook"></a>GitBook</h3><ul>
-<li>npm install -g gitbook :安装gitbook</li>
-<li>gitbook -V :查看gitbook安装是否成功，V为大写</li>
-<li>gitbook serve :启动gitbook，默认端口为4000</li>
-<li>gitbook serve –lrport 32928 –port 4000 :指定监听端口和启动的服务端口</li>
-</ul>
-<h3 id="jenkins"><a href="#jenkins" class="headerlink" title="jenkins"></a>jenkins</h3><ul>
-<li>jar -jar jenkins.war:启动</li>
-</ul>
-<h1 id="HEXO"><a href="#HEXO" class="headerlink" title="HEXO"></a>HEXO</h1><h2 id="hexo站点文件配置"><a href="#hexo站点文件配置" class="headerlink" title="hexo站点文件配置"></a>hexo站点文件配置</h2><h3 id="添加标签页面"><a href="#添加标签页面" class="headerlink" title="添加标签页面"></a>添加标签页面</h3><pre><code>title: 标题
-tags: 
-   -- Testing
-   -- Another Tag
----
-</code></pre><h3 id="禁用评论"><a href="#禁用评论" class="headerlink" title="禁用评论"></a>禁用评论</h3><pre><code>title: 禁用评论
-data: 2018-02-08 14:20:11
-type: &quot;tags&quot;
-comments: false
---
-</code></pre><h3 id="添加分类页面"><a href="#添加分类页面" class="headerlink" title="添加分类页面"></a>添加分类页面</h3><pre><code>title: 分类页面
-categories: hexo搭建过程
-</code></pre><h2 id="主题配置文件配置"><a href="#主题配置文件配置" class="headerlink" title="主题配置文件配置"></a>主题配置文件配置</h2><h3 id="侧边栏社交链接"><a href="#侧边栏社交链接" class="headerlink" title="侧边栏社交链接"></a>侧边栏社交链接</h3><pre><code># Social links
-Social: 
-   GitHub: https://github.com/your-user-name
-   Twitter: https://twitter.com/your-user-name
-   微博: http://weibo.com/your-user-name
-   豆瓣: http://douban.com/people/your-user-name
-   知乎: http://www.zhihu.com/people/your-user-name
-   # 等等
-</code></pre><h3 id="友情链接"><a href="#友情链接" class="headerlink" title="友情链接"></a>友情链接</h3><pre><code># title
-links_title: Links
-links:
-  MacTalk: http://macshuo.com/
-  Title: http://example.com/
-</code></pre><h2 id="发布新建文章"><a href="#发布新建文章" class="headerlink" title="发布新建文章"></a>发布新建文章</h2><pre><code>hexo new &apos;new blog&apos; #生成新的文章
-hexo generate  #生成更改
-hexo g #本地生成静态文件
-hexo d(deploy) #将本地静态文件推送到github上
+<h1 id="RestTemplate和Ribbon相结合"><a href="#RestTemplate和Ribbon相结合" class="headerlink" title="RestTemplate和Ribbon相结合"></a>RestTemplate和Ribbon相结合</h1><p>Spring Cloud的commons模块提供了一个<strong>@LoadBalanced</strong>注解，方便我们对RestTemplate添加一个LoadBalancerClient,以实现客户端负载均衡<br><img src="/images/ribbon1.png" alt="图片"></p>
+<p>因为Spring Boot的自动装配机制，所以我们可以看到这个包下有一个与<strong>@LoadBalanced</strong>自动装配类<code>LoadBalancerAutoConfiguration</code>.<br>在这个类中，首先定义了一个restTemplate对象的list。然后为restTemplate添加定制<br><img src="/images/ribbon2.png" alt="图片"></p>
+<p>接下来当不存在RetryTemplate时生效<code>LoadBalancerInterceptorConfig</code>内部类，代码如下</p>
+<pre><code>@Configuration
+@ConditionalOnMissingClass(&quot;org.springframework.retry.support.RetryTemplate&quot;)
+static class LoadBalancerInterceptorConfig {
+    @Bean
+    public LoadBalancerInterceptor ribbonInterceptor(
+            LoadBalancerClient loadBalancerClient,
+            LoadBalancerRequestFactory requestFactory) {
+        return new LoadBalancerInterceptor(loadBalancerClient, requestFactory);
+    }
 
-hexo d -g == hexo g + hexo d
-</code></pre><h2 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h2><p>  在此，加上点markdown语法</p>
-<h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><pre><code>1. 加粗 ** **
-2. 斜体 _ _
-</code></pre><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>  如果要标记某一个代码块内的代码，可以用(`)</p>
-<pre><code>例子: `wordpass`  
-</code></pre><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><pre><code>![图片](url)
-</code></pre><h2 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h2><pre><code>hexo new &quot;new blog&quot;
-</code></pre><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>   <a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">如何搭建blog</a><br>   <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">next 官方文档</a></p>
+    @Bean
+    @ConditionalOnMissingBean
+    public RestTemplateCustomizer restTemplateCustomizer(
+            final LoadBalancerInterceptor loadBalancerInterceptor) {
+        return new RestTemplateCustomizer() {
+        //为restTemplate添加拦截器
+            @Override
+            public void customize(RestTemplate restTemplate) {
+                List&lt;ClientHttpRequestInterceptor&gt; list = new ArrayList&lt;&gt;(
+                        restTemplate.getInterceptors());
+                list.add(loadBalancerInterceptor);
+                restTemplate.setInterceptors(list);
+            }
+        };
+    }
+}
+</code></pre><p>先暂存忽略RetryTemplate的情况，我们在行观察一下<code>LoadBalancerInterceptor</code>。这个类作用是进行实时拦截，通过<code>intercept()</code>方法实现负载均衡<br><img src="/images/ribbon3.png" alt="图片"></p>
+<h1 id="深入理解Ribbon"><a href="#深入理解Ribbon" class="headerlink" title="深入理解Ribbon"></a>深入理解Ribbon</h1><h2 id="LoadBalancerClient"><a href="#LoadBalancerClient" class="headerlink" title="LoadBalancerClient"></a>LoadBalancerClient</h2><p>LoadBalancerClient是Ribbon中最重要的一个组件，它作为一个客户端。继承了<code>ServiceInstanceChooser</code>接口，并且实现了<code>RibbonLoadBalancerClient</code>类。<br>其中<code>execute()</code>方法作用是使用来自LoadBalancer的ServiceInstance作为指定的请求执行请求，<code>reconstructURI()</code>作用是用来重构URL</p>
+<p><code>ServiceInstanceChooser</code>接口只有一个<code>choose</code>方法，用来根据serviceId来获取ServiceInstance</p>
+<p><code>RibbonLoadBalancerClient</code>中，choose()方法是选择具体服务实例的一个方法。该方法通过<code>getServer</code>方法获取实例，并最终交由<code>ILoadBalancer</code>的<code>chooseServer</code>方法处理.</p>
+<h1 id="ILoadBalancer"><a href="#ILoadBalancer" class="headerlink" title="ILoadBalancer"></a>ILoadBalancer</h1><p><code>ILoadBalancer</code>是一个实现负载均衡的一个接口，它需要一组可供选择的服务注册列表信息，以及根据特定方法来选择服务</p>
+<pre><code>public interface ILoadBalancer {
+
+
+    public void addServers(List&lt;Server&gt; newServers);
+
+
+    public Server chooseServer(Object key);
+
+
+    public void markServerDown(Server server);
+
+
+    @Deprecated
+    public List&lt;Server&gt; getServerList(boolean availableOnly);
+
+
+    public List&lt;Server&gt; getReachableServers();
+
+
+    public List&lt;Server&gt; getAllServers();
+}
+</code></pre><ul>
+<li><code>addServers</code>方法用来添加一个Server集合</li>
+<li><code>chooseServer</code>方法用来根据key来获取Server</li>
+<li><code>markServerDown</code>方法用来标记某个服务的下线</li>
+<li><code>getServerList</code>方法获取可用Server的集合</li>
+<li><code>getAllServers</code>获取所以的Server集合</li>
+</ul>
+<p>通过<code>ILoadBalancer</code>的链路图，我们可以得到以下的一张关系图<br><img src="/images/ribbon5.png" alt="图片"></p>
+<h2 id="DynamicServerListLoadBalancer"><a href="#DynamicServerListLoadBalancer" class="headerlink" title="DynamicServerListLoadBalancer"></a>DynamicServerListLoadBalancer</h2><p><code>DynamicServerListLoadBalancer</code>实现了6大配置</p>
+<ul>
+<li><strong>IPing</strong>:探测服务是否存活策略，配置是<code>DummyPing</code></li>
+<li><strong>IRule</strong>:负载均衡器策略，其表现的策略为:轮循、随机、并发量等，配置为<code>RoundRobinRule</code></li>
+<li><strong>ServerList</strong>:负载均衡使用服务器列表，配置为<code>ConfigurationBasedServerList</code></li>
+<li><strong>ServerListFilter</strong>:服务器列表过滤器，配置为<code>ZonePreferenceServerListFilter</code></li>
+<li><strong>ILoadBalancer</strong>:负载均衡器，配置为<code>ZoneAwareLoadBalancer</code></li>
+<li><strong>RestClient</strong>:服务调用器</li>
+</ul>
+<h3 id="IRule"><a href="#IRule" class="headerlink" title="IRule"></a>IRule</h3><p>IRule的作用是实现负载均衡，其表现策略有7种:</p>
+<ul>
+<li>RoundRobinRule(轮循)</li>
+<li>RandRule(随机)</li>
+<li>BestAvailableRule(并发量)</li>
+<li>AvailabilityFilteringRule(服务器状态)</li>
+<li>WeightedResponseTimeRule(根据响应时间)</li>
+<li>RetryRule(根据轮循的方式进行重试)</li>
+<li>ZoneAvoidanceRule(根据server的zone区域和可用性来轮询选择)</li>
+</ul>
+<h3 id="IPing"><a href="#IPing" class="headerlink" title="IPing"></a>IPing</h3><p>IPing是想让server发生”ping”,来判断该server是否有响应，从而判断该server是否可用。其接口中有一个isAlive方法，传入Server，返回true或false</p>
+<pre><code>public interface IPing {
+
+    /**
+     * Checks whether the given &lt;code&gt;Server&lt;/code&gt; is &quot;alive&quot; i.e. should be
+     * considered a candidate while loadbalancing
+     * 
+     */
+    public boolean isAlive(Server server);
+}
+</code></pre><p>其继承关系如下<br><img src="/images/ribbon6.png" alt="图片"></p>
 
       
     </div>
@@ -467,8 +466,8 @@ hexo d -g == hexo g + hexo d
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/10/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/02/23/Feign/" rel="next" title="Feign">
+                <i class="fa fa-chevron-left"></i> Feign
               </a>
             
           </div>
@@ -476,10 +475,6 @@ hexo d -g == hexo g + hexo d
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/11/初识Spring-Cloud-0/" rel="prev" title="初识Spring Cloud">
-                初识Spring Cloud <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -632,7 +627,7 @@ hexo d -g == hexo g + hexo d
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac-Linux"><span class="nav-number">1.</span> <span class="nav-text">Mac(Linux)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git"><span class="nav-number">2.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git更改用户和邮箱命令"><span class="nav-number">2.0.1.</span> <span class="nav-text">git更改用户和邮箱命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitBook"><span class="nav-number">2.0.2.</span> <span class="nav-text">GitBook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jenkins"><span class="nav-number">2.0.3.</span> <span class="nav-text">jenkins</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HEXO"><span class="nav-number">3.</span> <span class="nav-text">HEXO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo站点文件配置"><span class="nav-number">3.1.</span> <span class="nav-text">hexo站点文件配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加标签页面"><span class="nav-number">3.1.1.</span> <span class="nav-text">添加标签页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用评论"><span class="nav-number">3.1.2.</span> <span class="nav-text">禁用评论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加分类页面"><span class="nav-number">3.1.3.</span> <span class="nav-text">添加分类页面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题配置文件配置"><span class="nav-number">3.2.</span> <span class="nav-text">主题配置文件配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#侧边栏社交链接"><span class="nav-number">3.2.1.</span> <span class="nav-text">侧边栏社交链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#友情链接"><span class="nav-number">3.2.2.</span> <span class="nav-text">友情链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布新建文章"><span class="nav-number">3.3.</span> <span class="nav-text">发布新建文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Markdown语法"><span class="nav-number">3.4.</span> <span class="nav-text">Markdown语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强调"><span class="nav-number">3.4.1.</span> <span class="nav-text">强调</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.4.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片"><span class="nav-number">3.4.3.</span> <span class="nav-text">图片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建文章"><span class="nav-number">3.5.</span> <span class="nav-text">新建文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文档"><span class="nav-number">3.6.</span> <span class="nav-text">参考文档</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Ribbon"><span class="nav-number">1.</span> <span class="nav-text">什么是Ribbon</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RestTemplate和Ribbon相结合"><span class="nav-number">2.</span> <span class="nav-text">RestTemplate和Ribbon相结合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入理解Ribbon"><span class="nav-number">3.</span> <span class="nav-text">深入理解Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LoadBalancerClient"><span class="nav-number">3.1.</span> <span class="nav-text">LoadBalancerClient</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ILoadBalancer"><span class="nav-number">4.</span> <span class="nav-text">ILoadBalancer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DynamicServerListLoadBalancer"><span class="nav-number">4.1.</span> <span class="nav-text">DynamicServerListLoadBalancer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IRule"><span class="nav-number">4.1.1.</span> <span class="nav-text">IRule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPing"><span class="nav-number">4.1.2.</span> <span class="nav-text">IPing</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -809,9 +804,9 @@ hexo d -g == hexo g + hexo d
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/02/11/hexo常用命令/';
-          this.page.identifier = '2018/02/11/hexo常用命令/';
-          this.page.title = '常用命令';
+          this.page.url = 'http://yoursite.com/2018/02/26/Ribbon/';
+          this.page.identifier = '2018/02/26/Ribbon/';
+          this.page.title = 'Ribbon';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
