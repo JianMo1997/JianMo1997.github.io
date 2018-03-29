@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/images/ribbon3.png">
 <meta property="og:image" content="http://yoursite.com/images/ribbon5.png">
 <meta property="og:image" content="http://yoursite.com/images/ribbon6.png">
-<meta property="og:updated_time" content="2018-03-24T08:02:28.000Z">
+<meta property="og:updated_time" content="2018-03-29T12:00:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ribbon">
 <meta name="twitter:description" content="什么是RibbonRibbon是一个开源的负载均衡项目，可以简单的理解成类似于Nginx的负载均衡模块的功能，其官方的解释是 Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients.  Feign already uses Ri">
@@ -442,6 +442,13 @@ static class LoadBalancerInterceptorConfig {
     public boolean isAlive(Server server);
 }
 </code></pre><p>其继承关系如下<br><img src="/images/ribbon6.png" alt="图片"></p>
+<ul>
+<li>NoOpPing:不去ping，直接返回true,即可用。</li>
+<li>PingUrl:真是去ping某个url,判断其是否alive</li>
+<li>PingConstant:固定返回某服务可用，默认是true</li>
+<li>DummyPing:默认返回true，并实现了initWithNiwsConfig方法(设置一些配置)</li>
+<li>NIWSDiscoveryPing:根据DiscoveryEnabledServer的getInstanceInfo的getStatus来判断，如果status状态为UP服务可用，否则不可用</li>
+</ul>
 
       
     </div>
@@ -475,6 +482,10 @@ static class LoadBalancerInterceptorConfig {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/26/转-Redis/" rel="prev" title="[转]Redis">
+                [转]Redis <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -565,7 +576,7 @@ static class LoadBalancerInterceptorConfig {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -576,7 +587,7 @@ static class LoadBalancerInterceptorConfig {
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
