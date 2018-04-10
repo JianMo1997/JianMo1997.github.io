@@ -79,23 +79,17 @@
 
 
 
-<meta name="description" content="什么是RibbonRibbon是一个开源的负载均衡项目，可以简单的理解成类似于Nginx的负载均衡模块的功能，其官方的解释是 Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients.  Feign already uses Ri">
+<meta name="description" content="JMockit指南JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。使用Mock的一些建议:  真实对象具有不确定的行为(如股票行情不可预测) 真实对象很难被创建(比如web容器) 真实对象的某些行为很难被触发(比如网络错误) 真实对象另程序的运行时间大大增加 真实对象包含页面  基于行为验证的单元测">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ribbon">
-<meta property="og:url" content="http://yoursite.com/2018/02/26/Ribbon/index.html">
+<meta property="og:title" content="mock框架-JMockit">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/mock框架-JMockit/index.html">
 <meta property="og:site_name" content="笺默">
-<meta property="og:description" content="什么是RibbonRibbon是一个开源的负载均衡项目，可以简单的理解成类似于Nginx的负载均衡模块的功能，其官方的解释是 Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients.  Feign already uses Ri">
+<meta property="og:description" content="JMockit指南JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。使用Mock的一些建议:  真实对象具有不确定的行为(如股票行情不可预测) 真实对象很难被创建(比如web容器) 真实对象的某些行为很难被触发(比如网络错误) 真实对象另程序的运行时间大大增加 真实对象包含页面  基于行为验证的单元测">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/ribbon1.png">
-<meta property="og:image" content="http://yoursite.com/images/ribbon2.png">
-<meta property="og:image" content="http://yoursite.com/images/ribbon3.png">
-<meta property="og:image" content="http://yoursite.com/images/ribbon5.png">
-<meta property="og:image" content="http://yoursite.com/images/ribbon6.png">
-<meta property="og:updated_time" content="2018-04-10T12:03:27.000Z">
+<meta property="og:updated_time" content="2018-04-03T07:28:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ribbon">
-<meta name="twitter:description" content="什么是RibbonRibbon是一个开源的负载均衡项目，可以简单的理解成类似于Nginx的负载均衡模块的功能，其官方的解释是 Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients.  Feign already uses Ri">
-<meta name="twitter:image" content="http://yoursite.com/images/ribbon1.png">
+<meta name="twitter:title" content="mock框架-JMockit">
+<meta name="twitter:description" content="JMockit指南JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。使用Mock的一些建议:  真实对象具有不确定的行为(如股票行情不可预测) 真实对象很难被创建(比如web容器) 真实对象的某些行为很难被触发(比如网络错误) 真实对象另程序的运行时间大大增加 真实对象包含页面  基于行为验证的单元测">
 
 
 
@@ -125,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/26/Ribbon/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/mock框架-JMockit/"/>
 
 
 
 
 
-  <title>Ribbon | 笺默</title>
+  <title>mock框架-JMockit | 笺默</title>
   
 
 
@@ -238,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/Ribbon/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/mock框架-JMockit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="笺默">
@@ -255,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Ribbon</h1>
+          <h1 class="post-title" itemprop="name headline">mock框架-JMockit</h1>
         
 
         <div class="post-meta">
@@ -267,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T11:21:45+08:00">
-                2018-02-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T15:26:42+08:00">
+                2018-04-03
               </time>
             
 
@@ -290,8 +284,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringCloud/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringCloud</span>
+                  <a href="/categories/测试环境搭建/" itemprop="url" rel="index">
+                    <span itemprop="name">测试环境搭建</span>
                   </a>
                 </span>
 
@@ -308,9 +302,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/26/Ribbon/#comments" itemprop="discussionUrl">
+                <a href="/2018/04/03/mock框架-JMockit/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/26/Ribbon/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/04/03/mock框架-JMockit/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -338,135 +332,141 @@
       
 
       
-        <h1 id="什么是Ribbon"><a href="#什么是Ribbon" class="headerlink" title="什么是Ribbon"></a>什么是Ribbon</h1><p>Ribbon是一个开源的负载均衡项目，可以简单的理解成类似于Nginx的负载均衡模块的功能，其官方的解释是</p>
-<pre><code>Ribbon is a client side load balancer which gives you a lot of control over the behaviour of HTTP and TCP clients. 
-Feign already uses Ribbon, so if you are using @FeignClient then this section also applies.
-</code></pre><a id="more"></a>
-<p>其主要作用有</p>
+        <h1 id="JMockit指南"><a href="#JMockit指南" class="headerlink" title="JMockit指南"></a>JMockit指南</h1><p>JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。<br>使用Mock的一些建议:</p>
 <ul>
-<li>负载均衡</li>
-<li>容错</li>
-<li>多协议(HTTP,TCP,UDP)支持异步和反应模式</li>
-<li>缓存和批处理</li>
+<li>真实对象具有不确定的行为(如股票行情不可预测)</li>
+<li>真实对象很难被创建(比如web容器)</li>
+<li>真实对象的某些行为很难被触发(比如网络错误)</li>
+<li>真实对象另程序的运行时间大大增加</li>
+<li>真实对象包含页面</li>
 </ul>
-<h1 id="RestTemplate和Ribbon相结合"><a href="#RestTemplate和Ribbon相结合" class="headerlink" title="RestTemplate和Ribbon相结合"></a>RestTemplate和Ribbon相结合</h1><p>Spring Cloud的commons模块提供了一个<strong>@LoadBalanced</strong>注解，方便我们对RestTemplate添加一个LoadBalancerClient,以实现客户端负载均衡<br><img src="/images/ribbon1.png" alt="图片"></p>
-<p>因为Spring Boot的自动装配机制，所以我们可以看到这个包下有一个与<strong>@LoadBalanced</strong>自动装配类<code>LoadBalancerAutoConfiguration</code>.<br>在这个类中，首先定义了一个restTemplate对象的list。然后为restTemplate添加定制<br><img src="/images/ribbon2.png" alt="图片"></p>
-<p>接下来当不存在RetryTemplate时生效<code>LoadBalancerInterceptorConfig</code>内部类，代码如下</p>
-<pre><code>@Configuration
-@ConditionalOnMissingClass(&quot;org.springframework.retry.support.RetryTemplate&quot;)
-static class LoadBalancerInterceptorConfig {
-    @Bean
-    public LoadBalancerInterceptor ribbonInterceptor(
-            LoadBalancerClient loadBalancerClient,
-            LoadBalancerRequestFactory requestFactory) {
-        return new LoadBalancerInterceptor(loadBalancerClient, requestFactory);
-    }
+<p>基于行为验证的单元测试可以分为3部分:设置某些期待的调用，执行被测试代码，验证是否调用成功。</p>
+<ul>
+<li>测试类:在这个类中执行测试代码</li>
+<li>CUT(Code Under Test):被测试的类</li>
+<li>依赖类:CUT调用的类，也可是被mock的真实对象</li>
+</ul>
+<h2 id="使用JMockit生成Mock对象"><a href="#使用JMockit生成Mock对象" class="headerlink" title="使用JMockit生成Mock对象"></a>使用JMockit生成Mock对象</h2><p>JMockit可以mock任意的class、interface。可以将mock对象声明为域或方法的参数。默认情况下，mock对象的所以非private的方法(包括除了object的其他继承方法)，对这些<br>方法的调用不会执行原有代码，而是会转交给JMockit处理。</p>
+<p>JMockit三步骤</p>
+<ul>
+<li>record:录制期望。也可以理解说数据准备阶段。比如说是mock掉实例，模拟返回数据，调用次数。</li>
+<li>replay:通过调用被测代码，执行测试。</li>
+<li>verify:验证。验证执行测试的次数。</li>
+</ul>
+<p>在record需要初始化一个Expectation对象，在这个对象内部设置被依赖类的哪些方法被执行。在replay，执行被测试的类，被测试类会调用它依赖的类。JMockit会拦截调用并重定向到<br>verify.verify执行的操作类似于record，代表操作就是初始化Verifications对象</p>
+<p>引入依赖</p>
+<pre><code>&lt;dependency&gt;
+     &lt;groupId&gt;org.jmockit&lt;/groupId&gt;
+     &lt;artifactId&gt;jmockit&lt;/artifactId&gt;
+     &lt;version&gt;1.30&lt;/version&gt;
+     &lt;scope&gt;test&lt;/scope&gt;
+ &lt;/dependency&gt;
+</code></pre><p><strong>Demo</strong></p>
+<pre><code>@Component
+public class HelloWorld {
 
-    @Bean
-    @ConditionalOnMissingBean
-    public RestTemplateCustomizer restTemplateCustomizer(
-            final LoadBalancerInterceptor loadBalancerInterceptor) {
-        return new RestTemplateCustomizer() {
-        //为restTemplate添加拦截器
-            @Override
-            public void customize(RestTemplate restTemplate) {
-                List&lt;ClientHttpRequestInterceptor&gt; list = new ArrayList&lt;&gt;(
-                        restTemplate.getInterceptors());
-                list.add(loadBalancerInterceptor);
-                restTemplate.setInterceptors(list);
+    public String hello(){
+        String hello=&quot;hello world&quot;;
+        return hello;
+    }
+}
+
+
+@RunWith(JMockit.class)
+public class HelloWorldTest {
+
+    @Mocked
+    private HelloWorld helloWorld;
+
+    @Test
+    public void testHello(){
+        new NonStrictExpectations(){//record 一个期望块，用来录制期待模拟行为
+            {
+                helloWorld.hello();
+                result = &quot;hello word&quot;;
+            }
+        };
+
+        helloWorld.hello();//replay
+
+        new Verifications(){//verify 一个验证块，用来验证预期Mock行为被调用
+            {
+                helloWorld.hello();
+                times = 1;
             }
         };
     }
+
 }
-</code></pre><p>先暂存忽略RetryTemplate的情况，我们在行观察一下<code>LoadBalancerInterceptor</code>。这个类作用是进行实时拦截，通过<code>intercept()</code>方法实现负载均衡<br><img src="/images/ribbon3.png" alt="图片"></p>
-<h1 id="深入理解Ribbon"><a href="#深入理解Ribbon" class="headerlink" title="深入理解Ribbon"></a>深入理解Ribbon</h1><h2 id="LoadBalancerClient"><a href="#LoadBalancerClient" class="headerlink" title="LoadBalancerClient"></a>LoadBalancerClient</h2><p>LoadBalancerClient是Ribbon中最重要的一个组件，它作为一个客户端。继承了<code>ServiceInstanceChooser</code>接口，并且实现了<code>RibbonLoadBalancerClient</code>类。<br>其中<code>execute()</code>方法作用是使用来自LoadBalancer的ServiceInstance作为指定的请求执行请求，<code>reconstructURI()</code>作用是用来重构URL</p>
-<p><code>ServiceInstanceChooser</code>接口只有一个<code>choose</code>方法，用来根据serviceId来获取ServiceInstance</p>
-<p><code>RibbonLoadBalancerClient</code>中，choose()方法是选择具体服务实例的一个方法。该方法通过<code>getServer</code>方法获取实例，并最终交由<code>ILoadBalancer</code>的<code>chooseServer</code>方法处理.</p>
-<h1 id="ILoadBalancer"><a href="#ILoadBalancer" class="headerlink" title="ILoadBalancer"></a>ILoadBalancer</h1><p><code>ILoadBalancer</code>是一个实现负载均衡的一个接口，它需要一组可供选择的服务注册列表信息，以及根据特定方法来选择服务</p>
-<pre><code>public interface ILoadBalancer {
-
-
-    public void addServers(List&lt;Server&gt; newServers);
-
-
-    public Server chooseServer(Object key);
-
-
-    public void markServerDown(Server server);
-
-
-    @Deprecated
-    public List&lt;Server&gt; getServerList(boolean availableOnly);
-
-
-    public List&lt;Server&gt; getReachableServers();
-
-
-    public List&lt;Server&gt; getAllServers();
-}
-</code></pre><ul>
-<li><code>addServers</code>方法用来添加一个Server集合</li>
-<li><code>chooseServer</code>方法用来根据key来获取Server</li>
-<li><code>markServerDown</code>方法用来标记某个服务的下线</li>
-<li><code>getServerList</code>方法获取可用Server的集合</li>
-<li><code>getAllServers</code>获取所以的Server集合</li>
-</ul>
-<p>通过<code>ILoadBalancer</code>的链路图，我们可以得到以下的一张关系图<br><img src="/images/ribbon5.png" alt="图片"></p>
-<h2 id="DynamicServerListLoadBalancer"><a href="#DynamicServerListLoadBalancer" class="headerlink" title="DynamicServerListLoadBalancer"></a>DynamicServerListLoadBalancer</h2><p><code>DynamicServerListLoadBalancer</code>实现了6大配置</p>
-<ul>
-<li><strong>IPing</strong>:探测服务是否存活策略，配置是<code>DummyPing</code></li>
-<li><strong>IRule</strong>:负载均衡器策略，其表现的策略为:轮循、随机、并发量等，配置为<code>RoundRobinRule</code></li>
-<li><strong>ServerList</strong>:负载均衡使用服务器列表，配置为<code>ConfigurationBasedServerList</code></li>
-<li><strong>ServerListFilter</strong>:服务器列表过滤器，配置为<code>ZonePreferenceServerListFilter</code></li>
-<li><strong>ILoadBalancer</strong>:负载均衡器，配置为<code>ZoneAwareLoadBalancer</code></li>
-<li><strong>RestClient</strong>:服务调用器</li>
-</ul>
-<h3 id="IRule"><a href="#IRule" class="headerlink" title="IRule"></a>IRule</h3><p>IRule的作用是实现负载均衡，其表现策略有7种:</p>
-<ul>
-<li>RoundRobinRule(轮循)</li>
-<li>RandRule(随机)</li>
-<li>BestAvailableRule(并发量)</li>
-<li>AvailabilityFilteringRule(服务器状态)</li>
-<li>WeightedResponseTimeRule(根据响应时间)</li>
-<li>RetryRule(根据轮循的方式进行重试)</li>
-<li>ZoneAvoidanceRule(根据server的zone区域和可用性来轮询选择)</li>
-</ul>
-<h3 id="IPing"><a href="#IPing" class="headerlink" title="IPing"></a>IPing</h3><p>IPing是想让server发生”ping”,来判断该server是否有响应，从而判断该server是否可用。其接口中有一个isAlive方法，传入Server，返回true或false</p>
-<pre><code>public interface IPing {
-
-    /**
-     * Checks whether the given &lt;code&gt;Server&lt;/code&gt; is &quot;alive&quot; i.e. should be
-     * considered a candidate while loadbalancing
-     * 
-     */
-    public boolean isAlive(Server server);
-}
-</code></pre><p>其继承关系如下<br><img src="/images/ribbon6.png" alt="图片"></p>
-<ul>
-<li>NoOpPing:不去ping，直接返回true,即可用。</li>
-<li>PingUrl:真是去ping某个url,判断其是否alive</li>
-<li>PingConstant:固定返回某服务可用，默认是true</li>
-<li>DummyPing:默认返回true，并实现了initWithNiwsConfig方法(设置一些配置)</li>
-<li>NIWSDiscoveryPing:根据DiscoveryEnabledServer的getInstanceInfo的getStatus来判断，如果status状态为UP服务可用，否则不可用</li>
-</ul>
-<h3 id="ServerList"><a href="#ServerList" class="headerlink" title="ServerList"></a>ServerList</h3><p>ServerList是定义获取所以server的注册列表信息的接口，其代码如下</p>
-<pre><code>public interface ServerList&lt;T extends Server&gt; {
-
-    public List&lt;T&gt; getInitialListOfServers();
-
-    /**
-     * Return updated list of servers. This is called say every 30 secs
-     * (configurable) by the Loadbalancer&apos;s Ping cycle
-     * 
-     */
-    public List&lt;T&gt; getUpdatedListOfServers();   
-</code></pre><p>继承实现的类包括了:</p>
-<ul>
-<li>ConfigurationBasedServerList: 实用程序类，可以从配置中加载服务器列表</li>
-<li>DiscoveryEnabledNIWSServerList: 从Eureka中获取Server列表</li>
-<li>DomainExtractingServerList:</li>
-<li>StaticServerList:</li>
-</ul>
+</code></pre><p>JMockit会对@Mocked对象自动进行依赖注入，所以无需进行手动实例化。</p>
+<h2 id="JMockit注解与方法"><a href="#JMockit注解与方法" class="headerlink" title="JMockit注解与方法"></a>JMockit注解与方法</h2><h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Tested</td>
+<td>用于标识一个被测对象的实例，只能是类而不能是接口,因为一个接口可能有多个实现类。通过@Tested的对象，将在JMockit之前初始化。</td>
+</tr>
+<tr>
+<td>@Injectable</td>
+<td>@Injectable的实例会自动注入到@Tested模块中，只会mock掉指定实例。如果没有被赋初值，那么JMockit将会以相应规则赋初值</td>
+</tr>
+<tr>
+<td>@Mocked</td>
+<td>mocked修饰的实例，将会把实例对应类的所以实例的所以行为都mock掉(无论构造方法还是private、public方法),被mock的方法的调用将不会执行原有的方法，而是会转交给JMockit处理</td>
+</tr>
+<tr>
+<td>@Capturing</td>
+<td>标识一个被mock的类以及子类均被mock</td>
+</tr>
+</tbody>
+</table>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Expectations</td>
+<td>一个期望块，用来录制期待模拟行为。<code>result</code>是Expectations的一个变量，用来分配给该字段的值将作为当前期望的结果。</td>
+</tr>
+<tr>
+<td>NonStrictExceptions</td>
+<td>类似于<code>Expectations</code>，不同的是。<code>Expectations</code>块中声明的mock一定要被执行，如果没有执行，会被认为case不通过。<code>NonStrictExceptions</code>则是必须调用一次</td>
+</tr>
+<tr>
+<td>StrictExceptions</td>
+<td>严格的期望，指定方法必须按照指定的顺序执行，与<code>NonStrictExceptions</code>用法相反</td>
+</tr>
+<tr>
+<td>Verifications</td>
+<td>一个验证块，用来Mock行为是否被调用。通常与<code>NonStrictExceptions</code>配合使用.<code>times</code>用来验证调用的次数</td>
+</tr>
+<tr>
+<td>Invocation</td>
+<td>工具类，可以获取调用信息</td>
+</tr>
+<tr>
+<td>Delegate</td>
+<td>自己指定返回值，适合那种需要参数决定返回值的场景，只需要执行匿名子类就可以</td>
+</tr>
+<tr>
+<td>MockUp</td>
+<td>模拟函数的实现</td>
+</tr>
+<tr>
+<td>Deencapsulation</td>
+<td>反射工具类</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -491,8 +491,8 @@ static class LoadBalancerInterceptorConfig {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/23/Feign/" rel="next" title="Feign">
-                <i class="fa fa-chevron-left"></i> Feign
+              <a href="/2018/03/26/转-Redis/" rel="next" title="[转]Redis">
+                <i class="fa fa-chevron-left"></i> [转]Redis
               </a>
             
           </div>
@@ -500,10 +500,6 @@ static class LoadBalancerInterceptorConfig {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/26/转-Redis/" rel="prev" title="[转]Redis">
-                [转]Redis <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -656,7 +652,7 @@ static class LoadBalancerInterceptorConfig {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Ribbon"><span class="nav-number">1.</span> <span class="nav-text">什么是Ribbon</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RestTemplate和Ribbon相结合"><span class="nav-number">2.</span> <span class="nav-text">RestTemplate和Ribbon相结合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入理解Ribbon"><span class="nav-number">3.</span> <span class="nav-text">深入理解Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LoadBalancerClient"><span class="nav-number">3.1.</span> <span class="nav-text">LoadBalancerClient</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ILoadBalancer"><span class="nav-number">4.</span> <span class="nav-text">ILoadBalancer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DynamicServerListLoadBalancer"><span class="nav-number">4.1.</span> <span class="nav-text">DynamicServerListLoadBalancer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IRule"><span class="nav-number">4.1.1.</span> <span class="nav-text">IRule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPing"><span class="nav-number">4.1.2.</span> <span class="nav-text">IPing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServerList"><span class="nav-number">4.1.3.</span> <span class="nav-text">ServerList</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JMockit指南"><span class="nav-number">1.</span> <span class="nav-text">JMockit指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用JMockit生成Mock对象"><span class="nav-number">1.1.</span> <span class="nav-text">使用JMockit生成Mock对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JMockit注解与方法"><span class="nav-number">1.2.</span> <span class="nav-text">JMockit注解与方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注解"><span class="nav-number">1.2.1.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.2.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -833,9 +829,9 @@ static class LoadBalancerInterceptorConfig {
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/02/26/Ribbon/';
-          this.page.identifier = '2018/02/26/Ribbon/';
-          this.page.title = 'Ribbon';
+          this.page.url = 'http://yoursite.com/2018/04/03/mock框架-JMockit/';
+          this.page.identifier = '2018/04/03/mock框架-JMockit/';
+          this.page.title = 'mock框架-JMockit';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
