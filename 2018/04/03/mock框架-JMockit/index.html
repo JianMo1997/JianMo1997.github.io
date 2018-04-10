@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="JMockit指南JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。使用Mock的一些建议:  真实对象具有不确定的行为(如股票行情不可预测) 真实对象很难被创建(比如web容器) 真实对象的某些行为很难被触发(比如网络错误) 真实对象另程序的运行时间大大增加 真实对象包含页面  基于行为验证的单元测">
+<meta name="description" content="JMockit指南JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。使用Mock的一些建议:  真实对象具有不确定的行为(如股票行情不可预测) 真实对象很难被创建(比如web容器) 真实对象的某些行为很难被触发(比如网络错误) 真实对象另程序的运行时间大大增加 真实对象包含页面">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mock框架-JMockit">
 <meta property="og:url" content="http://yoursite.com/2018/04/03/mock框架-JMockit/index.html">
 <meta property="og:site_name" content="笺默">
-<meta property="og:description" content="JMockit指南JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。使用Mock的一些建议:  真实对象具有不确定的行为(如股票行情不可预测) 真实对象很难被创建(比如web容器) 真实对象的某些行为很难被触发(比如网络错误) 真实对象另程序的运行时间大大增加 真实对象包含页面  基于行为验证的单元测">
+<meta property="og:description" content="JMockit指南JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。使用Mock的一些建议:  真实对象具有不确定的行为(如股票行情不可预测) 真实对象很难被创建(比如web容器) 真实对象的某些行为很难被触发(比如网络错误) 真实对象另程序的运行时间大大增加 真实对象包含页面">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-03T07:28:48.000Z">
+<meta property="og:updated_time" content="2018-04-10T12:15:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mock框架-JMockit">
-<meta name="twitter:description" content="JMockit指南JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。使用Mock的一些建议:  真实对象具有不确定的行为(如股票行情不可预测) 真实对象很难被创建(比如web容器) 真实对象的某些行为很难被触发(比如网络错误) 真实对象另程序的运行时间大大增加 真实对象包含页面  基于行为验证的单元测">
+<meta name="twitter:description" content="JMockit指南JMockit是google code的一个java单元测试的mock项。虚拟的对象就是mock对象，mock对象其实就是真实对象在调试期的替代品。使用Mock的一些建议:  真实对象具有不确定的行为(如股票行情不可预测) 真实对象很难被创建(比如web容器) 真实对象的某些行为很难被触发(比如网络错误) 真实对象另程序的运行时间大大增加 真实对象包含页面">
 
 
 
@@ -338,7 +338,8 @@
 <li>真实对象很难被创建(比如web容器)</li>
 <li>真实对象的某些行为很难被触发(比如网络错误)</li>
 <li>真实对象另程序的运行时间大大增加</li>
-<li>真实对象包含页面</li>
+<li>真实对象包含页面<a id="more"></a>
+</li>
 </ul>
 <p>基于行为验证的单元测试可以分为3部分:设置某些期待的调用，执行被测试代码，验证是否调用成功。</p>
 <ul>
