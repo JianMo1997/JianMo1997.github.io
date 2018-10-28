@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/10/28/5bd56112d57f5.png">
 <meta property="og:image" content="https://i.loli.net/2018/10/28/5bd5622451817.png">
 <meta property="og:image" content="https://i.loli.net/2018/10/28/5bd5b6f6ddc25.png">
-<meta property="og:updated_time" content="2018-10-28T13:29:37.000Z">
+<meta property="og:updated_time" content="2018-10-28T13:33:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArrayList">
 <meta name="twitter:description" content="写在前面工作以后才发现，自己的基础还不是很扎实，可以说是很渣来形容。所以痛定思痛，决心抽出点时间好好来复习一下自己比较薄弱的基础。">
@@ -349,12 +349,12 @@
 <pre><code>注意：
  * Map和Collection是并行的,map并为继承Collection
  * 以上线程安全的有:**Vector**,**stack**,**hashtable**,**enumeration**
-</code></pre><p>ArrayList继承了AbstractList抽象类并实现了List、<strong>RandomAccess</strong>(快速随机访问)、Cloneable(主要实现克隆功能)以及Serializable<br>(序列化:对象的寿命有时候会随程序结束而终结，而有时需要将内存中的对象状态保存下来，Java提供了这种机制，就是序列化)。同时，ArrayList<br>并不是线程安全的，多线程的情况下，建议使用<strong>Vector</strong>或者<strong>CopyOnWriterArrayList</strong></p>
+</code></pre><p>ArrayList继承了AbstractList抽象类并实现了List、<strong>RandomAccess</strong>(快速随机访问)、Cloneable(主要实现克隆功能)以及Serializable(序列化:对象的寿命有时候会随程序结束而终结，而有时需要将内存中的对象状态保存下来，Java提供了这种机制，就是序列化)。同时，ArrayList<br>并不是线程安全的，多线程的情况下，建议使用<strong>Vector</strong>或者<strong>CopyOnWriterArrayList</strong></p>
 <p>接下来看一下构造函数，ArrayList创建了三个构造函数。先来看第一个构造函数</p>
 <h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList()"></a>ArrayList()</h3><p><img src="https://i.loli.net/2018/10/27/5bd4053183edd.png" alt="图片"><br>很简单，就一行代码。但是<code>this.elementData</code>和<code>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</code>代表了什么，看代码</p>
 <p><img src="https://i.loli.net/2018/10/27/5bd4081c43053.png" alt="图片"><br>根据注解我们可以得到<code>elementData</code>是存储ArrayList数组的缓冲区</p>
 <p>在来看<code>DEFAULTCAPACITY_EMPTY_ELEMENTDATA</code><br><img src="https://i.loli.net/2018/10/27/5bd41dfc70405.png" alt="图片"><br>根据注解我们可得到其作用是用于默认大小的空实例的共享空数组实例(我发现其底层也是数组结构)</p>
-<p>那这几个参数到底做了什么了？其实，在新new出一个ArrayList时,<strong>如果没有指定数组长度,ArrayList会默认创建出一个长度为10的数组.那这边有个问题，如果每次都默认创建一个长度为10的数组，但是实际的值并没有达到10，会不会造成内存浪费呢？<br>答案是会的，但是这个浪费对内存的影响是微乎其微的</strong></p>
+<p>那这几个参数到底做了什么了？其实，在新new出一个ArrayList时,<strong>如果没有指定数组长度,ArrayList会默认创建出一个长度为10的数组.那这边有个问题，如果每次都默认创建一个长度为10的数组，但是实际的值并没有达到10，会不会造成内存浪费呢？答案是会的，但是这个浪费对内存的影响是微乎其微的</strong></p>
 <h3 id="ArrayList-int-initialCapacity"><a href="#ArrayList-int-initialCapacity" class="headerlink" title="ArrayList(int initialCapacity)"></a>ArrayList(int initialCapacity)</h3><p><img src="https://i.loli.net/2018/10/27/5bd46a319534b.png" alt="图片"><br>它会创建指定初始容量的一个空的数组，这个数组的值可以任由你自己传入。但是如果你传的值为0的话，使用<code>EMPTY_ELEMENTDATA</code>进行初始化。</p>
 <h3 id="ArrayList-Collection-lt-extends-E-gt-c"><a href="#ArrayList-Collection-lt-extends-E-gt-c" class="headerlink" title="ArrayList(Collection&lt;? extends E&gt; c)"></a>ArrayList(Collection&lt;? extends E&gt; c)</h3><p>ArrayList还支持了使用集合构造的构造函数。<br><img src="https://i.loli.net/2018/10/28/5bd554ac9f873.png" alt="图片"><br>其首先会将集合转换成数组，并将值赋予给常量size判断是否为0,然后检查转化的类型，如果转换的不是Object[]类型,使用Arrays中的copyOf方法进行复制。</p>
 <h2 id="ArrayList的一些常用方法"><a href="#ArrayList的一些常用方法" class="headerlink" title="ArrayList的一些常用方法"></a>ArrayList的一些常用方法</h2><p>每次我们向数组中新增参数时，总是会绕不开<code>Add</code>方法<br><img src="https://i.loli.net/2018/10/28/5bd56112d57f5.png" alt="图片"><br>我们先看一下<code>ensureCapacityInternal</code>方法<br><img src="https://i.loli.net/2018/10/28/5bd5622451817.png" alt="图片"><br><code>minCapacity</code>的值为1,如果底层数组就是默认的缓存数组,取两个参数大的值并往下调用，很明显这个值是大于10的。<br>接下来我们来看一下<code>ensureExplicitCapacity</code>方法<br><img src="https://i.loli.net/2018/10/28/5bd5b6f6ddc25.png" alt="图片"><br><code>modCount</code>是一个AbstractList抽象类中的变量，这里用来记录修改次数</p>
